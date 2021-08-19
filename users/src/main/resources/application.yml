@@ -14,9 +14,9 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
 
-courses:
-  ribbon:
-    eureka:
-      enabled: true
-    ServerListRefreshInterval: 15000
-    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+# courses:
+#   ribbon:
+#     eureka:
+#       enabled: true
+#     ServerListRefreshInterval: 15000
+#     NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
