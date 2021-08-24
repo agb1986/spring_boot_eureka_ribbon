@@ -25,3 +25,8 @@ hs_err_pid*
 .vscode/
 nohup.out
 bin/
+.project
+.settings/
+.classpath
+.factorypath
+target/
