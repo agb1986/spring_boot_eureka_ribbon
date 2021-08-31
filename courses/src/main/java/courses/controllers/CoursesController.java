@@ -1,7 +1,6 @@
 package courses.controllers;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,6 @@ public class CoursesController {
 
     @PostMapping(path = "/courses")
     public ResponseEntity<List<Course>> createCourse(@RequestBody Course course) {
-        course.setCourseID(UUID.randomUUID());
         return new ResponseEntity<>(coursesService.createCourse(course), HttpStatus.OK);
     }
 

@@ -1,42 +1,33 @@
 package courses.services.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import courses.models.Course;
+import courses.repository.CourseRepository;
 import courses.services.interfaces.ICoursesService;
 
 @Service
 public class CoursesService implements ICoursesService {
-    List<Course> courses;
+    @Autowired
+    CourseRepository repository;
 
     @Override
     public List<Course> getCourses() {
-        if (courses == null) {
-            courses = new ArrayList<>();
-        }
-        return courses;
+        return repository.findAll();
     }
 
     @Override
     public Course getCourse(String courseId) {
-        for (Course course : courses) {
-            if (course.getCourseID().toString().contains(courseId)) {
-                return course;
-            }
-        }
-        return null;
+        return repository.findById(Long.parseLong(courseId));
     }
 
     @Override
     public List<Course> createCourse(Course course) {
-        if (courses == null) {
-            courses = new ArrayList<>();
-        }
-        courses.add(course);
-        return courses;
+        repository.save(course);
+        return getCourses();
     }
 
     @Override
@@ -46,14 +37,12 @@ public class CoursesService implements ICoursesService {
         updatedCourse.setCourseName(course.getCourseName());
         updatedCourse.setCourseType(course.getCourseType());
         updatedCourse.setCourseTutor(course.getCourseTutor());
-        courses.add(updatedCourse);
-        return courses;
+        return createCourse(course);
     }
 
     @Override
     public List<Course> deleteCourse(String courseId) {
-        Course courseToDelete = getCourse(courseId);
-        courses.remove(courseToDelete);
-        return courses;
+        repository.deleteById(Long.parseLong(courseId));
+        return getCourses();
     }
 }
